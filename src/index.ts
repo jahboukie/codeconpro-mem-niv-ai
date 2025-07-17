@@ -13,16 +13,16 @@ import { claudeCommand } from './commands/claude';
 const program = new Command();
 
 program
-  .name('codecontext-pro')
-  .description('🧠 AI Coding Assistant Amplifier - Giving AI assistants the tools they deserve')
-  .version('0.1.0');
+  .name('codeconpro')
+  .description('🧠 Claude-powered CodeContext Pro - AI assistant with persistent memory and execution superpowers')
+  .version('1.0.0');
 
 // ASCII Art Banner
 const banner = `
 ${chalk.cyan('╔══════════════════════════════════════════════════════════════╗')}
-${chalk.cyan('║')}                    ${chalk.bold.yellow('🧠 CodeContext Pro')}                    ${chalk.cyan('║')}
-${chalk.cyan('║')}              ${chalk.gray('AI Coding Assistant Amplifier')}               ${chalk.cyan('║')}
-${chalk.cyan('║')}                 ${chalk.green('Phase 2: Memory + Execution')}              ${chalk.cyan('║')}
+${chalk.cyan('║')}                ${chalk.bold.yellow('🧠 CodeContext Pro + Claude')}                ${chalk.cyan('║')}
+${chalk.cyan('║')}           ${chalk.gray('AI Assistant with Persistent Memory')}            ${chalk.cyan('║')}
+${chalk.cyan('║')}              ${chalk.green('Claude + Memory + Execution')}               ${chalk.cyan('║')}
 ${chalk.cyan('╚══════════════════════════════════════════════════════════════╝')}
 `;
 

@@ -27,7 +27,7 @@ export async function claudeCommand(options: any) {
   // Check if CodeContext Pro is initialized
   if (!fs.existsSync(configPath)) {
     console.log(chalk.red('❌ CodeContext Pro is not initialized in this project'));
-    console.log(chalk.gray('   Run "codecontext-pro init --memory-only" to get started'));
+    console.log(chalk.gray('   Run "codeconpro init --memory-only" to get started'));
     return;
   }
 
@@ -314,7 +314,7 @@ Please confirm you can see the project context and respond briefly.`;
     
     console.log(chalk.gray('\n📝 Test conversation stored in project memory'));
     console.log(chalk.bold('\n🎉 Integration fully functional!'));
-    console.log(chalk.gray('   Run with interactive mode: codecontext-pro claude --interactive'));
+    console.log(chalk.gray('   Run with interactive mode: codeconpro claude --interactive'));
 
   } catch (error) {
     console.error(chalk.red('❌ Claude API test failed:'), error);

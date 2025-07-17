@@ -1,10 +1,10 @@
 {
-  "name": "codecontext-pro",
-  "version": "1.2.1",
-  "description": "Stop paying for AI amnesia. Give your AI assistant persistent memory and code execution superpowers.",
+  "name": "codeconpro-claude",
+  "version": "1.0.0",
+  "description": "Claude-powered CodeContext Pro - AI assistant with persistent memory and code execution superpowers.",
   "main": "dist/index.js",
   "bin": {
-    "codecontext-pro": "./dist/index.js"
+    "codeconpro": "./dist/index.js"
   },
   "scripts": {
     "build": "tsc",
