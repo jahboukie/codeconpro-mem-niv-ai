@@ -37,7 +37,7 @@ export declare class AICommand {
      */
     private handleStatus;
     /**
-     * Handle interactive mode
+     * Handle interactive mode with enhanced chat window
      */
     private handleInteractiveMode;
     /**

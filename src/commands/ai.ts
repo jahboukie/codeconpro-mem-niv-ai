@@ -236,26 +236,53 @@ export class AICommand {
   private async handleSetup(): Promise<void> {
     console.log(chalk.cyan('🔧 Setting up AI providers...\n'));
 
-    const questions = [
+    // First, ask which providers they want to set up
+    const providerChoice = await inquirer.prompt([
       {
+        type: 'checkbox',
+        name: 'providers',
+        message: '🎯 Which AI providers would you like to set up?',
+        choices: [
+          { name: 'Claude (Anthropic) - Best for coding and analysis', value: 'claude' },
+          { name: 'GPT (OpenAI) - Great for creative tasks', value: 'gpt' }
+        ],
+        default: ['claude'],
+        validate: (answer) => answer.length > 0 || 'Please select at least one provider'
+      }
+    ]);
+
+    const questions = [];
+
+    // Add questions based on provider selection
+    if (providerChoice.providers.includes('claude')) {
+      questions.push({
         type: 'input',
         name: 'anthropicKey',
         message: '🤖 Enter your Anthropic API key (for Claude):',
         validate: (input: string) => input.trim().length > 0 || 'API key required'
-      },
-      {
+      });
+    }
+
+    if (providerChoice.providers.includes('gpt')) {
+      questions.push({
         type: 'input',
         name: 'openaiKey',
         message: '🤖 Enter your OpenAI API key (for GPT):',
         validate: (input: string) => input.trim().length > 0 || 'API key required'
-      },
-      {
-        type: 'list',
-        name: 'defaultProvider',
-        message: '🎯 Choose default AI provider:',
-        choices: ['claude', 'gpt']
-      }
-    ];
+      });
+    }
+
+    // Add default provider question
+    questions.push({
+      type: 'list',
+      name: 'defaultProvider',
+      message: '🎯 Choose default AI provider:',
+      choices: providerChoice.providers.map((p: string) => ({
+        name: p === 'claude' ? '🧠 Claude (Anthropic) - Best for coding' : '🎯 GPT (OpenAI) - Great for creative tasks',
+        value: p
+      })),
+      default: providerChoice.providers[0]
+    });
 
     const answers = await inquirer.prompt(questions);
 
@@ -328,13 +355,20 @@ export class AICommand {
   }
 
   /**
-   * Handle interactive mode
+   * Handle interactive mode with enhanced chat window
    */
   private async handleInteractiveMode(options: any): Promise<void> {
     await this.ensureInitialized();
     
-    console.log(chalk.cyan('🎮 Interactive AI Chat Mode'));
-    console.log(chalk.gray('Type "exit" to quit, "switch" to change provider\n'));
+    // Clear screen and show welcome
+    console.clear();
+    console.log(chalk.cyan('╔══════════════════════════════════════════════════════════════╗'));
+    console.log(chalk.cyan('║') + chalk.bold.yellow('                🎮 CodeContext AI Chat Window                ') + chalk.cyan('║'));
+    console.log(chalk.cyan('║') + chalk.gray('        AI Assistant with Memory + Execution Powers        ') + chalk.cyan('║'));
+    console.log(chalk.cyan('╚══════════════════════════════════════════════════════════════╝'));
+    console.log(chalk.gray('\nCommands: "exit" to quit | "switch" to change provider | "clear" to clear\n'));
+
+    let messageCount = 0;
 
     while (true) {
       try {
@@ -342,14 +376,20 @@ export class AICommand {
           {
             type: 'input',
             name: 'message',
-            message: chalk.yellow('You:'),
+            message: chalk.cyan('💬 You:'),
             validate: (input) => input.trim().length > 0 || 'Please enter a message'
           }
         ]);
 
         if (message.toLowerCase() === 'exit') {
-          console.log(chalk.green('👋 Goodbye!'));
+          console.log(chalk.green('\n👋 Chat session ended. All conversations saved to memory!'));
           break;
+        }
+
+        if (message.toLowerCase() === 'clear') {
+          console.clear();
+          console.log(chalk.cyan('🧹 Chat cleared\n'));
+          continue;
         }
 
         if (message.toLowerCase() === 'switch') {
@@ -357,8 +397,11 @@ export class AICommand {
             {
               type: 'list',
               name: 'provider',
-              message: 'Switch to which provider?',
-              choices: ['claude', 'gpt']
+              message: '🔄 Switch to which provider?',
+              choices: [
+                { name: '🧠 Claude (Anthropic) - Best for coding', value: 'claude' },
+                { name: '🎯 GPT (OpenAI) - Great for creative tasks', value: 'gpt' }
+              ]
             }
           ]);
           await this.aiManager.switchProvider(provider);
@@ -366,7 +409,10 @@ export class AICommand {
           continue;
         }
 
-        // Process message
+        messageCount++;
+        console.log(chalk.gray(`\n─── Message ${messageCount} ───`));
+
+        // Process message with enhanced capabilities awareness
         const projectContext = await this.getProjectContext();
         const request: EnhancedAIRequest = {
           message,

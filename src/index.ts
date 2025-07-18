@@ -16,7 +16,7 @@ const program = new Command();
 program
   .name('codecontext')
   .description('🧠 CodeContext AI - AI assistant with persistent memory and execution superpowers')
-  .version('1.1.1');
+  .version('1.2.0');
 
 // ASCII Art Banner
 const banner = `

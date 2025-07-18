@@ -231,26 +231,49 @@ class AICommand {
      */
     async handleSetup() {
         console.log(chalk_1.default.cyan('🔧 Setting up AI providers...\n'));
-        const questions = [
+        // First, ask which providers they want to set up
+        const providerChoice = await inquirer_1.default.prompt([
             {
+                type: 'checkbox',
+                name: 'providers',
+                message: '🎯 Which AI providers would you like to set up?',
+                choices: [
+                    { name: 'Claude (Anthropic) - Best for coding and analysis', value: 'claude' },
+                    { name: 'GPT (OpenAI) - Great for creative tasks', value: 'gpt' }
+                ],
+                default: ['claude'],
+                validate: (answer) => answer.length > 0 || 'Please select at least one provider'
+            }
+        ]);
+        const questions = [];
+        // Add questions based on provider selection
+        if (providerChoice.providers.includes('claude')) {
+            questions.push({
                 type: 'input',
                 name: 'anthropicKey',
                 message: '🤖 Enter your Anthropic API key (for Claude):',
                 validate: (input) => input.trim().length > 0 || 'API key required'
-            },
-            {
+            });
+        }
+        if (providerChoice.providers.includes('gpt')) {
+            questions.push({
                 type: 'input',
                 name: 'openaiKey',
                 message: '🤖 Enter your OpenAI API key (for GPT):',
                 validate: (input) => input.trim().length > 0 || 'API key required'
-            },
-            {
-                type: 'list',
-                name: 'defaultProvider',
-                message: '🎯 Choose default AI provider:',
-                choices: ['claude', 'gpt']
-            }
-        ];
+            });
+        }
+        // Add default provider question
+        questions.push({
+            type: 'list',
+            name: 'defaultProvider',
+            message: '🎯 Choose default AI provider:',
+            choices: providerChoice.providers.map((p) => ({
+                name: p === 'claude' ? '🧠 Claude (Anthropic) - Best for coding' : '🎯 GPT (OpenAI) - Great for creative tasks',
+                value: p
+            })),
+            default: providerChoice.providers[0]
+        });
         const answers = await inquirer_1.default.prompt(questions);
         // Save configuration
         const configPath = path.join(process.cwd(), '.codecontext', 'ai-config.json');
@@ -311,40 +334,56 @@ class AICommand {
         }
     }
     /**
-     * Handle interactive mode
+     * Handle interactive mode with enhanced chat window
      */
     async handleInteractiveMode(options) {
         await this.ensureInitialized();
-        console.log(chalk_1.default.cyan('🎮 Interactive AI Chat Mode'));
-        console.log(chalk_1.default.gray('Type "exit" to quit, "switch" to change provider\n'));
+        // Clear screen and show welcome
+        console.clear();
+        console.log(chalk_1.default.cyan('╔══════════════════════════════════════════════════════════════╗'));
+        console.log(chalk_1.default.cyan('║') + chalk_1.default.bold.yellow('                🎮 CodeContext AI Chat Window                ') + chalk_1.default.cyan('║'));
+        console.log(chalk_1.default.cyan('║') + chalk_1.default.gray('        AI Assistant with Memory + Execution Powers        ') + chalk_1.default.cyan('║'));
+        console.log(chalk_1.default.cyan('╚══════════════════════════════════════════════════════════════╝'));
+        console.log(chalk_1.default.gray('\nCommands: "exit" to quit | "switch" to change provider | "clear" to clear\n'));
+        let messageCount = 0;
         while (true) {
             try {
                 const { message } = await inquirer_1.default.prompt([
                     {
                         type: 'input',
                         name: 'message',
-                        message: chalk_1.default.yellow('You:'),
+                        message: chalk_1.default.cyan('💬 You:'),
                         validate: (input) => input.trim().length > 0 || 'Please enter a message'
                     }
                 ]);
                 if (message.toLowerCase() === 'exit') {
-                    console.log(chalk_1.default.green('👋 Goodbye!'));
+                    console.log(chalk_1.default.green('\n👋 Chat session ended. All conversations saved to memory!'));
                     break;
+                }
+                if (message.toLowerCase() === 'clear') {
+                    console.clear();
+                    console.log(chalk_1.default.cyan('🧹 Chat cleared\n'));
+                    continue;
                 }
                 if (message.toLowerCase() === 'switch') {
                     const { provider } = await inquirer_1.default.prompt([
                         {
                             type: 'list',
                             name: 'provider',
-                            message: 'Switch to which provider?',
-                            choices: ['claude', 'gpt']
+                            message: '🔄 Switch to which provider?',
+                            choices: [
+                                { name: '🧠 Claude (Anthropic) - Best for coding', value: 'claude' },
+                                { name: '🎯 GPT (OpenAI) - Great for creative tasks', value: 'gpt' }
+                            ]
                         }
                     ]);
                     await this.aiManager.switchProvider(provider);
                     console.log(chalk_1.default.green(`✅ Switched to ${provider.toUpperCase()}\n`));
                     continue;
                 }
-                // Process message
+                messageCount++;
+                console.log(chalk_1.default.gray(`\n─── Message ${messageCount} ───`));
+                // Process message with enhanced capabilities awareness
                 const projectContext = await this.getProjectContext();
                 const request = {
                     message,

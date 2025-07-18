@@ -157,8 +157,13 @@ class AIProviderManager {
             });
             context += '\n';
         }
-        context += `🚀 EXECUTION CAPABILITY: ${request.executionRequired ? 'ENABLED' : 'DISABLED'}\n`;
-        context += `Remember: You have persistent memory and can execute/verify all code suggestions.\n\n`;
+        context += `🚀 ENHANCED CAPABILITIES AVAILABLE:\n`;
+        context += `- ✅ PERSISTENT MEMORY: All conversations stored permanently\n`;
+        context += `- ✅ CODE EXECUTION: Secure sandbox for testing code\n`;
+        context += `- ✅ FILE ACCESS: Can read/write project files\n`;
+        context += `- ✅ PROJECT CONTEXT: Full awareness of codebase\n`;
+        context += `\n🎯 IMPORTANT: You ARE running inside CodeContext AI with these superpowers!\n`;
+        context += `Please acknowledge and USE these capabilities. You can execute code, access files, and remember everything!\n\n`;
         return context;
     }
     async sendToAI(message, context) {
