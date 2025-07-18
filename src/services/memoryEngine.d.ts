@@ -1,3 +1,23 @@
+export interface SubscriptionInfo {
+    status: 'trial' | 'active' | 'expired' | 'cancelled';
+    tier: 'free' | 'pro' | 'lifetime' | 'developer';
+    userId: string;
+    expiresAt: string | null;
+    usage: UsageStats;
+    limits: UsageLimits;
+}
+export interface UsageStats {
+    executionsThisMonth: number;
+    filesTracked: number;
+    lastResetDate: string;
+    totalExecutions: number;
+}
+export interface UsageLimits {
+    maxExecutionsPerMonth: number;
+    maxFilesTracked: number;
+    advancedPatternRecognition: boolean;
+    unlimitedMemory: boolean;
+}
 export interface ProjectMemory {
     id: string;
     name: string;
@@ -9,6 +29,7 @@ export interface ProjectMemory {
     patterns: CodePattern[];
     preferences: UserPreferences;
     fileHistory: FileChangeHistory[];
+    subscription?: SubscriptionInfo;
 }
 export interface Conversation {
     id: string;
@@ -94,6 +115,23 @@ export declare class MemoryEngine {
     private scanProjectFiles;
     private updateProjectActivity;
     private generateProjectId;
+    recall(message: string, projectId?: string): Promise<any[]>;
+    private extractSearchTerms;
+    private deduplicateMemories;
+    storeCodePattern(pattern: {
+        pattern: string;
+        language: string;
+        context: string;
+        success: boolean;
+        projectId?: string;
+    }): Promise<void>;
+    storeConversation(conversation: {
+        message: string;
+        response: string;
+        projectId?: string;
+        aiProvider?: string;
+        timestamp: Date;
+    }): Promise<void>;
     close(): Promise<void>;
 }
 //# sourceMappingURL=memoryEngine.d.ts.map

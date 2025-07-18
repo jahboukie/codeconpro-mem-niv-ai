@@ -1,0 +1,12 @@
+{
+  "version": "0.1.0",
+  "mode": "memory-only",
+  "projectId": "50924923e1412499",
+  "projectName": "test-project",
+  "createdAt": "2025-07-14T12:46:21.511Z",
+  "features": {
+    "memory": true,
+    "execution": false,
+    "intelligence": false
+  }
+}

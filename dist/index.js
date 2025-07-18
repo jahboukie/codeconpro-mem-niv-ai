@@ -13,17 +13,18 @@ const execute_1 = require("./commands/execute");
 const upgrade_1 = require("./commands/upgrade");
 const login_1 = require("./commands/login");
 const claude_1 = require("./commands/claude");
+const ai_1 = require("./commands/ai");
 const program = new commander_1.Command();
 program
-    .name('codecontext-pro')
-    .description('🧠 AI Coding Assistant Amplifier - Giving AI assistants the tools they deserve')
-    .version('0.1.0');
+    .name('codecontext')
+    .description('🧠 CodeContext AI - AI assistant with persistent memory and execution superpowers')
+    .version('1.0.0');
 // ASCII Art Banner
 const banner = `
 ${chalk_1.default.cyan('╔══════════════════════════════════════════════════════════════╗')}
-${chalk_1.default.cyan('║')}                    ${chalk_1.default.bold.yellow('🧠 CodeContext Pro')}                    ${chalk_1.default.cyan('║')}
-${chalk_1.default.cyan('║')}              ${chalk_1.default.gray('AI Coding Assistant Amplifier')}               ${chalk_1.default.cyan('║')}
-${chalk_1.default.cyan('║')}                 ${chalk_1.default.green('Phase 2: Memory + Execution')}              ${chalk_1.default.cyan('║')}
+${chalk_1.default.cyan('║')}                    ${chalk_1.default.bold.yellow('🧠 CodeContext AI')}                     ${chalk_1.default.cyan('║')}
+${chalk_1.default.cyan('║')}           ${chalk_1.default.gray('AI Assistant with Persistent Memory')}            ${chalk_1.default.cyan('║')}
+${chalk_1.default.cyan('║')}              ${chalk_1.default.green('Claude + Memory + Execution')}               ${chalk_1.default.cyan('║')}
 ${chalk_1.default.cyan('╚══════════════════════════════════════════════════════════════╝')}
 `;
 program.addHelpText('beforeAll', banner);
@@ -66,6 +67,9 @@ program
     .command('upgrade')
     .description('Upgrade to Lifetime Pro - unlimited executions and memory')
     .action(upgrade_1.upgradeCommand);
+// AI Integration Commands (THE CURSOR KILLER!)
+const aiCommand = new ai_1.AICommand();
+aiCommand.register(program);
 // Global error handling
 process.on('unhandledRejection', (reason, promise) => {
     console.error(chalk_1.default.red('❌ Unhandled Rejection at:'), promise, chalk_1.default.red('reason:'), reason);

@@ -9,18 +9,19 @@ import { createExecuteCommand } from './commands/execute';
 import { upgradeCommand } from './commands/upgrade';
 import { loginCommand, logoutCommand } from './commands/login';
 import { claudeCommand } from './commands/claude';
+import { AICommand } from './commands/ai';
 
 const program = new Command();
 
 program
-  .name('codeconpro')
-  .description('🧠 Claude-powered CodeContext Pro - AI assistant with persistent memory and execution superpowers')
+  .name('codecontext')
+  .description('🧠 CodeContext AI - AI assistant with persistent memory and execution superpowers')
   .version('1.0.0');
 
 // ASCII Art Banner
 const banner = `
 ${chalk.cyan('╔══════════════════════════════════════════════════════════════╗')}
-${chalk.cyan('║')}                ${chalk.bold.yellow('🧠 CodeContext Pro + Claude')}                ${chalk.cyan('║')}
+${chalk.cyan('║')}                    ${chalk.bold.yellow('🧠 CodeContext AI')}                     ${chalk.cyan('║')}
 ${chalk.cyan('║')}           ${chalk.gray('AI Assistant with Persistent Memory')}            ${chalk.cyan('║')}
 ${chalk.cyan('║')}              ${chalk.green('Claude + Memory + Execution')}               ${chalk.cyan('║')}
 ${chalk.cyan('╚══════════════════════════════════════════════════════════════╝')}
@@ -74,6 +75,10 @@ program
   .command('upgrade')
   .description('Upgrade to Lifetime Pro - unlimited executions and memory')
   .action(upgradeCommand);
+
+// AI Integration Commands (THE CURSOR KILLER!)
+const aiCommand = new AICommand();
+aiCommand.register(program);
 
 // Global error handling
 process.on('unhandledRejection', (reason, promise) => {

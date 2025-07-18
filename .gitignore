@@ -1,0 +1,29 @@
+
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# CodeContext configuration
+.codecontext/
+
+# VS Code
+.vscode/
+
+# Test project
+test-project/
+
+# Memory exports
+memory-export.json
+
+# Logs
+*.log
+debug*.log

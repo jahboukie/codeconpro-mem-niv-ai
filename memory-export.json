@@ -1,0 +1,308 @@
+{
+  "exportedAt": "2025-07-17T19:12:47.399Z",
+  "project": {
+    "name": "cli",
+    "id": "e4878c2f8091e685",
+    "createdAt": "2025-07-17T23:12:47.000Z"
+  },
+  "conversations": [],
+  "decisions": [],
+  "fileHistory": [
+    {
+      "id": "71d425c0-9ee5-4061-9262-18542af838c4",
+      "filePath": "src/index.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "2073f645-2782-429a-8844-ef895d0a3644",
+      "filePath": "src/index.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "cf0bc7f2-ea1b-4db0-97ab-e445f1aeb392",
+      "filePath": "src/services/apiClient.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "e9e12c14-33d0-4b5c-a1fa-1331f0a71a2e",
+      "filePath": "src/services/memoryEngine.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "020dd4e6-b4b4-4e86-8675-2b00e8278cef",
+      "filePath": "src/services/memoryEngine.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "33f15247-7723-45c5-977f-24b1bd547085",
+      "filePath": "src/services/memoryEngine.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "8486a5a4-2a29-4013-bf7d-fdcb4c6e29e6",
+      "filePath": "src/services/subscriptionManager.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "5738f133-7527-4a2a-82cf-ef15174610ea",
+      "filePath": "src/services/vscodeManager.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "37e7f509-f5ac-40f2-ac79-d2a113d67689",
+      "filePath": "src/services/vscodeManager.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "579fd8a5-dad1-4365-8da7-0475e7ee92af",
+      "filePath": "test-project/src/components/Button.jsx",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "6380a8ec-c543-43c9-9005-882396d40d60",
+      "filePath": "test-project/src/index.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:13.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "713f031d-435f-41cd-949e-6ba77043c6a5",
+      "filePath": "dist/commands/execute.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "d6ae3d9e-9310-45af-9a8e-659a589dad0d",
+      "filePath": "dist/commands/execute.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "7acd19e6-ce86-48a0-95c1-4c10cda88215",
+      "filePath": "dist/commands/init.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "054b6d78-de21-485d-9b86-b4d444883499",
+      "filePath": "dist/commands/init.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "949694ef-585f-495d-a007-e6542a5d0bd5",
+      "filePath": "dist/commands/login.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "922e9d7c-a1f3-4902-a68e-d82fe97a7548",
+      "filePath": "dist/commands/login.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "d2d26af3-28ba-4fc1-8556-20f97f3c909d",
+      "filePath": "dist/commands/memory.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "d2bc9c0e-a027-423e-9662-42ffeff6cf28",
+      "filePath": "dist/commands/memory.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "493844d2-0e5c-4e4a-8e65-4e550adea5fe",
+      "filePath": "dist/commands/status.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "7ac70f89-8cfd-47e6-aedf-224f92a0427e",
+      "filePath": "dist/commands/status.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "6927f0ee-3fda-40d0-9c36-06059580bcdb",
+      "filePath": "dist/commands/upgrade.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "1225f40a-2ec6-448d-84ba-207d53e6d217",
+      "filePath": "dist/commands/upgrade.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "f361a078-1338-468b-bdb3-b6150e071a4b",
+      "filePath": "dist/index.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "5856b27b-b149-4b29-a99b-7626ca0f8c2e",
+      "filePath": "dist/index.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "f4ba78ca-41de-40b8-8aa0-270c2be4303a",
+      "filePath": "dist/services/apiClient.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "f0567425-636c-41dd-ba88-e9c610ba885c",
+      "filePath": "dist/services/apiClient.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "4642f487-c30c-4b2e-8cd0-2eae0ba3cb7b",
+      "filePath": "dist/services/memoryEngine.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "1c0e1120-e763-4e5e-b6c2-a5c90ecb425a",
+      "filePath": "dist/services/memoryEngine.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "335cb3c5-2594-4d09-87cd-aba777f8aed6",
+      "filePath": "dist/services/subscriptionManager.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "ed4d5256-4c78-45ea-bd10-64997545913b",
+      "filePath": "dist/services/subscriptionManager.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "4a59e7a3-38f8-45e0-8d99-49e9c5d97f35",
+      "filePath": "dist/services/vscodeManager.d.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "6a28b65c-d478-4e5c-9ff3-d477f4ef0ac1",
+      "filePath": "dist/services/vscodeManager.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "71f25402-ff56-465c-a64f-2f05caa072ac",
+      "filePath": "src/commands/execute.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "eeac9502-2a54-4454-b53b-adc8739f973d",
+      "filePath": "src/commands/init.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "78846a96-81b7-42e5-8606-73e8fb4ba967",
+      "filePath": "src/commands/init.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "a42d119b-b398-40c1-825f-e3565ec3d293",
+      "filePath": "src/commands/login.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "f376f615-8e24-4be7-b01f-e8a462e9b857",
+      "filePath": "src/commands/memory.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "3688efef-c0f1-4b37-bab5-ce6e41d16fde",
+      "filePath": "src/commands/memory.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "f20163c9-9856-4e52-b864-1b1e50e15fe1",
+      "filePath": "src/commands/status.js",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "1532fbd7-9a2d-44a4-8c3a-a12100c4a04e",
+      "filePath": "src/commands/status.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    },
+    {
+      "id": "152a908a-01d2-4cf0-98e3-f8e65d7e79c6",
+      "filePath": "src/commands/upgrade.ts",
+      "changeType": "created",
+      "timestamp": "2025-07-17T23:10:12.000Z",
+      "conversationId": null
+    }
+  ],
+  "patterns": [],
+  "preferences": {}
+}

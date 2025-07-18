@@ -345,6 +345,104 @@ class MemoryEngine {
         const crypto = require('crypto');
         return crypto.createHash('md5').update(this.projectPath).digest('hex').substring(0, 16);
     }
+    // AI Provider Integration Methods
+    async recall(message, projectId) {
+        const pid = projectId || this.generateProjectId();
+        // Extract key terms for better search
+        const searchTerms = this.extractSearchTerms(message);
+        const memories = [];
+        // Search recent conversations (broader search)
+        const recentConversations = await this.allQuery(`SELECT c.*, m.content, m.role FROM conversations c 
+       JOIN messages m ON c.id = m.conversation_id 
+       WHERE c.project_id = ? 
+       ORDER BY c.timestamp DESC LIMIT 20`, [pid]);
+        // Add relevant recent conversations
+        for (const conv of recentConversations) {
+            memories.push({
+                type: 'conversation',
+                content: `${conv.role}: ${conv.content}`,
+                timestamp: conv.timestamp,
+                aiAssistant: conv.ai_assistant
+            });
+        }
+        // Search for architectural decisions with multiple term matching
+        for (const term of searchTerms) {
+            const decisions = await this.allQuery(`SELECT * FROM architectural_decisions 
+         WHERE project_id = ? AND (decision LIKE ? OR rationale LIKE ?)
+         ORDER BY timestamp DESC LIMIT 5`, [pid, `%${term}%`, `%${term}%`]);
+            for (const decision of decisions) {
+                memories.push({
+                    type: 'decision',
+                    content: decision.decision,
+                    rationale: decision.rationale,
+                    timestamp: decision.timestamp
+                });
+            }
+        }
+        // Search code patterns
+        for (const term of searchTerms) {
+            const patterns = await this.allQuery(`SELECT * FROM code_patterns 
+         WHERE project_id = ? AND (pattern LIKE ? OR context LIKE ?)
+         ORDER BY frequency DESC LIMIT 5`, [pid, `%${term}%`, `%${term}%`]);
+            for (const pattern of patterns) {
+                memories.push({
+                    type: 'pattern',
+                    content: pattern.pattern,
+                    context: pattern.context,
+                    frequency: pattern.frequency
+                });
+            }
+        }
+        // Remove duplicates and return most relevant
+        const uniqueMemories = this.deduplicateMemories(memories);
+        return uniqueMemories.slice(0, 15); // Limit to top 15 most relevant
+    }
+    extractSearchTerms(message) {
+        // Extract meaningful terms for search
+        const terms = message.toLowerCase()
+            .replace(/[^\w\s]/g, ' ')
+            .split(/\s+/)
+            .filter(term => term.length > 2)
+            .filter(term => !['the', 'and', 'for', 'are', 'you', 'can', 'how', 'what', 'why', 'when', 'where'].includes(term));
+        return [...new Set(terms)]; // Remove duplicates
+    }
+    deduplicateMemories(memories) {
+        const seen = new Set();
+        return memories.filter(memory => {
+            const key = `${memory.type}:${memory.content?.substring(0, 50)}`;
+            if (seen.has(key))
+                return false;
+            seen.add(key);
+            return true;
+        });
+    }
+    async storeCodePattern(pattern) {
+        const pid = pattern.projectId || this.generateProjectId();
+        const patternId = (0, uuid_1.v4)();
+        await this.runQuery(`INSERT INTO code_patterns (id, project_id, pattern, context, frequency) VALUES (?, ?, ?, ?, ?)`, [patternId, pid, pattern.pattern, JSON.stringify({
+                language: pattern.language,
+                context: pattern.context,
+                success: pattern.success
+            }), 1]);
+    }
+    async storeConversation(conversation) {
+        const pid = conversation.projectId || this.generateProjectId();
+        const messages = [
+            {
+                id: (0, uuid_1.v4)(),
+                role: 'user',
+                content: conversation.message,
+                timestamp: conversation.timestamp
+            },
+            {
+                id: (0, uuid_1.v4)(),
+                role: 'assistant',
+                content: conversation.response,
+                timestamp: conversation.timestamp
+            }
+        ];
+        await this.recordConversation(conversation.aiProvider || 'unknown', messages);
+    }
     async close() {
         return new Promise((resolve, reject) => {
             if (this.db) {

@@ -94,9 +94,9 @@ export declare class MemoryEngine {
     constructor(projectPath: string);
     initialize(): Promise<void>;
     private createTables;
-    private runQuery;
-    private getQuery;
-    private allQuery;
+    protected runQuery(sql: string, params?: any[]): Promise<any>;
+    protected getQuery(sql: string, params?: any[]): Promise<any>;
+    protected allQuery(sql: string, params?: any[]): Promise<any[]>;
     recordConversation(aiAssistant: string, messages: Message[], context?: ConversationContext): Promise<string>;
     recordArchitecturalDecision(decision: Omit<ArchitecturalDecision, 'id' | 'timestamp'>): Promise<void>;
     trackFileChange(filePath: string, changeType: 'created' | 'modified' | 'deleted', conversationId?: string): Promise<void>;
@@ -115,6 +115,23 @@ export declare class MemoryEngine {
     private scanProjectFiles;
     private updateProjectActivity;
     private generateProjectId;
+    recall(message: string, projectId?: string): Promise<any[]>;
+    protected extractSearchTerms(message: string): string[];
+    protected deduplicateMemories(memories: any[]): any[];
+    storeCodePattern(pattern: {
+        pattern: string;
+        language: string;
+        context: string;
+        success: boolean;
+        projectId?: string;
+    }): Promise<void>;
+    storeConversation(conversation: {
+        message: string;
+        response: string;
+        projectId?: string;
+        aiProvider?: string;
+        timestamp: Date;
+    }): Promise<void>;
     close(): Promise<void>;
 }
 //# sourceMappingURL=memoryEngine.d.ts.map

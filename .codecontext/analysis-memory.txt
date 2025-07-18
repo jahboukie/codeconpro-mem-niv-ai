@@ -1,0 +1,1 @@
+Payment flow fix validated in sandbox with 100% confidence
