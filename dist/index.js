@@ -18,7 +18,7 @@ const program = new commander_1.Command();
 program
     .name('codecontext')
     .description('🧠 CodeContext AI - AI assistant with persistent memory and execution superpowers')
-    .version('1.0.0');
+    .version('1.1.1');
 // ASCII Art Banner
 const banner = `
 ${chalk_1.default.cyan('╔══════════════════════════════════════════════════════════════╗')}

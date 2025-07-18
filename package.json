@@ -1,6 +1,6 @@
 {
   "name": "codecontext-ai",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Claude-powered CodeContext Pro - AI assistant with persistent memory and code execution superpowers.",
   "main": "dist/index.js",
   "bin": {

@@ -61,7 +61,7 @@ export async function initCommand(options: InitOptions) {
     console.log(chalk.gray('   1. Open VS Code in this project'));
     console.log(chalk.gray('   2. The CodeContext Pro extension will activate automatically'));
     console.log(chalk.gray('   3. Start coding - your AI assistant will now remember everything!'));
-    console.log(chalk.gray('\n   Run "codecontext-pro status" to check memory status'));
+    console.log(chalk.gray('\n   Run "codecontext status" to check memory status'));
 
   } catch (error) {
     console.error(chalk.red('\n❌ Initialization failed:'), error);
